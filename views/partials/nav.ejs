@@ -1,31 +1,93 @@
+ <style>
 
-<nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark" data-bs-theme="dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#" style="color:rgb(255, 174, 0);">Vlog</a>
+  body{
+    background-color: #c5f3fa;
+  }
+  .nav-profile-img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    transition: 0.3s ease;
+  }
+  .nav-profile-img:hover {
+    border-color: #0d6efd;
+    transform: scale(1.05);
+  }
+  .navbar-custom {
+    background: #ffffffd8;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #eaeaea;
+  }
+  .nav-link {
+    font-weight: 500;
+    transition: 0.3s;
+  }
+  .nav-link:hover {
+    color: #0d6efd !important;
+  }
+</style>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-lg navbar-custom py-3 shadow-sm">
+  <div class="container">
+
+    <!-- Brand -->
+    <a class="navbar-brand fw-bold fs-4" href="/" style="color:#111c2e; background-color: rgb(235, 164, 77); border-radius: 30%;">
+      <i class="bi bi-journal-richtext"></i> Vlog
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav">
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      
+      <!-- Left Menu -->
+      <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link" href="/blog">Explore</a>
         </li>
+
+        <% if (user) { %>
         <li class="nav-item">
-          <a class="nav-link" href="#">Add Blog</a>
+          <a class="nav-link" href="/blog/add-new">Write</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            userName
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Log out</a></li>
-          </ul>
-        </li>
+        <% } %>
       </ul>
+
+      <!-- Right Side -->
+      <ul class="navbar-nav ms-auto align-items-center">
+
+        <% if (user) { %>
+
+          <!-- Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle d-flex align-items-center" role="button" data-bs-toggle="dropdown">
+              <img src="<%= user.profileImageURL || '/images/admin.png' %>" class="nav-profile-img me-2">
+              <span class="fw-semibold"><%= user.fullName.split(" ")[0] %></span>
+            </a>
+
+            <ul class="dropdown-menu dropdown-menu-end shadow">
+              <li><a class="dropdown-item" href="/profile">Profile</a></li>
+              <li><a class="dropdown-item" href="/blog/my-blogs">My Blogs</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item text-danger" href="/logout">Logout</a></li>
+            </ul>
+          </li>
+
+        <% } else { %>
+          <li class="nav-item ms-2">
+            <a href="/signin" class="btn btn-primary px-3">Login</a>
+          </li>
+          <li class="nav-item ms-2">
+            <a href="/signup" class="btn btn-outline-primary px-3">Signup</a>
+          </li>
+        <% } %>
+
+      </ul>
+
     </div>
   </div>
 </nav>
+
