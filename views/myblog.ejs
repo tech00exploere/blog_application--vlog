@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('./partials/head') %>
+  <title>My Blogs</title>
+  <style>
+    body {
+      background-color: #f3fbfd;
+    }
+    .blog-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .blog-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.12);
+    }
+    .cover-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <%- include('./partials/nav') %>
+
+  <div class="container py-5">
+    <h2 class="fw-bold text-center mb-4">My Blogs</h2>
+
+    <% if (blogs.length === 0) { %>
+      <div class="text-center text-muted">
+        <p>You haven't posted any blogs yet.</p>
+        <a href="/blog/add-new" class="btn btn-primary">Write Your First Blog</a>
+      </div>
+    <% } else { %>
+      <div class="row g-4">
+        <% blogs.forEach(blog => { %>
+          <div class="col-md-4">
+            <div class="blog-card h-100">
+              <% if (blog.coverImageURL) { %>
+                <img src="<%= blog.coverImageURL %>" alt="Cover" class="cover-img">
+              <% } else { %>
+                <img src="/images/default-blog.jpg" alt="Default" class="cover-img">
+              <% } %>
+
+              <div class="p-3">
+                <h5 class="fw-bold"><%= blog.title %></h5>
+                <p class="text-muted"><%= blog.description.substring(0, 100) %>...</p>
+                <a href="/blog/<%= blog._id %>" class="btn btn-sm btn-outline-primary">Read More</a>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    <% } %>
+  </div>
+</body>
+</html>
