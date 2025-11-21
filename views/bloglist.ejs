@@ -1,1 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('./partials/head') %>
+  <title>All Blogs</title>
+</head>
+<body>
+  <%- include('./partials/nav') %>
 
+  <div class="container mt-5">
+    <h2 class="mb-4 text-center">All Blogs</h2>
+
+    <% if (blogs && blogs.length > 0) { %>
+      <div class="row">
+        <% blogs.forEach(blog => { %>
+          <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title"><%= blog.title %></h5>
+                <p class="card-text text-muted"><%= blog.body.substring(0, 120) %>...</p>
+                <a href="/blog/<%= blog._id %>" class="btn btn-sm btn-primary">Read More</a>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    <% } else { %>
+      <p class="text-center text-muted">No blogs found.</p>
+    <% } %>
+  </div>
+</body>
+</html>
