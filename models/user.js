@@ -74,7 +74,6 @@ userSchema.statics.matchPassword = async function (email, password) {
   return null;
 };
 
-
 // Custom static login helper
 userSchema.statics.login = async function (email, password) {
   const user = await this.findOne({ email }).select("+password +salt");
