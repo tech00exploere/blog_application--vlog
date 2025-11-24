@@ -12,17 +12,17 @@ const userSchema = new Schema(
       type: String,
       required: [true, "Email is required"],
       unique: true,
-      lowercase: true,   // normalize case
+      lowercase: true,  
       trim: true,
     },
     salt: {
       type: String,
-      select: false,     // don't include salt in queries by default
+      select: false,  
     },
     password: {
       type: String,
       required: true,
-      select: false,     // prevents password from leaking
+      select: false,  
     },
     profileImageURL: {
       type: String,
