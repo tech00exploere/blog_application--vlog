@@ -36,7 +36,6 @@ const blogSchema = new Schema(
   { timestamps: true }
 );
 
-// Auto-generate slug on title change
 blogSchema.pre("save", function (next) {
   if (this.isModified("title")) {
     this.slug = slugify(this.title, { lower: true, strict: true });
