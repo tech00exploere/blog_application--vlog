@@ -42,6 +42,5 @@ blogSchema.pre("save", function (next) {
   }
   next();
 });
-
 const Blog = model("Blog", blogSchema);
 module.exports = Blog;
